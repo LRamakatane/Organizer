@@ -8,9 +8,10 @@ namespace Organizer
         {
 
             DirectoryInfo dir = new DirectoryInfo(@"C:\Users\LehlohonoloRamakatan\Downloads");
-            //TODO: How to handle other image formats e.g *.jpg
+            /*TODO: How to handle other image formats e.g *.jpg & other file formats e.g *.pdf
+                    Or maybe get all files instead of images and the sort them within the foreach loop*/
             FileInfo[] imageFiles = dir.GetFiles("*.png");
-            String imgPath = @"C:\Users\LehlohonoloRamakatan\OneDrive - Flash\Pictures\Organizer\";
+            String imgPath = @"C:\Users\LehlohonoloRamakatan\Pictures\Organizer\";
 
             Console.WriteLine("Found {0} *.png files\n", imageFiles.Length);
 
@@ -24,28 +25,19 @@ namespace Organizer
                     }
                     else
                     {
-                        /*File.Move(f.FullName, imgPath);*/
-                        f.MoveTo(imgPath);
-                        Console.WriteLine("{0} was moved to {1}.", f.FullName, imgPath);
+                        File.Move(f.FullName, imgPath + f.Name, true);
+                        Console.WriteLine("{0} was moved to {1}.", f.FullName, imgPath + f.Name);
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("The process failed: {0}", e.ToString());
-                    /* 
-                     * Currently getting this error:
-                     * 
-                       System.IO.IOException: Cannot create a file when that file already exists.
-                       at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
-                    */
                 }
 
-                //Console.WriteLine("File name: {0}", f.Name);
-                //TODO: Error handling incase directory doesn't exist. 
-                //f.MoveTo(imgPath);
-                /*                Console.WriteLine("File size: {0}", f.Length);
-                                Console.WriteLine("Creation: {0}", f.CreationTime);
-                                Console.WriteLine("Attributes: {0}", f.Attributes);*/
+                /*Console.WriteLine("File name: {0}", f.Name);
+                  Console.WriteLine("File size: {0}", f.Length);
+                  Console.WriteLine("Creation: {0}", f.CreationTime);
+                  Console.WriteLine("Attributes: {0}", f.Attributes);*/
 
             }
 
